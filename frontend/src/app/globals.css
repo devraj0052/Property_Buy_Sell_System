@@ -1,0 +1,80 @@
+@import "tailwindcss";
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --color-primary: #3b82f6; /* Blue 500 */
+  --color-primary-dark: #2563eb; /* Blue 600 */
+  --color-secondary: #10b981; /* Emerald 500 */
+  
+  --color-dark-bg: #0f172a; /* Slate 900 */
+  --color-dark-surface: #1e293b; /* Slate 800 */
+  --color-dark-border: #334155; /* Slate 700 */
+  
+  --color-light-bg: #f8fafc; /* Slate 50 */
+  --color-light-surface: #ffffff;
+  --color-light-border: #e2e8f0; /* Slate 200 */
+
+  --font-sans: 'Inter', system-ui, sans-serif;
+}
+
+/* Custom Glassmorphism Utility */
+@utility glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+@utility glass-dark {
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--color-light-bg);
+  color: #0f172a;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Dark Mode overrides if class="dark" is present on HTML */
+.dark body {
+  background-color: var(--color-dark-bg);
+  color: #f8fafc;
+}
+
+/* Hide scrollbar for clean UI */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #475569;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Animations */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+@utility animate-float {
+  animation: float 3s ease-in-out infinite;
+}
