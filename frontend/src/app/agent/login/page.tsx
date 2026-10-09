@@ -126,7 +126,7 @@ export default function AgentLoginPage() {
 
           <div className="mt-6">
             <a
-              href="http://localhost:5000/api/auth/google"
+              href="/api/auth/google"
               className="w-full flex items-center justify-center gap-3 bg-slate-50 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-900 dark:text-white rounded-xl px-4 py-3 font-semibold transition-all border border-green-200 dark:border-green-900/30"
             >
               <svg className="w-5 h-5" viewBox="0 0 24 24">

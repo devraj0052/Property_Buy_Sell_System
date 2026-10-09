@@ -1,7 +1,17 @@
 import axios from 'axios';
 
+const getBaseUrl = () => {
+  if (typeof window !== 'undefined') {
+    return process.env.NEXT_PUBLIC_API_URL || '/api';
+  }
+  if (process.env.BACKEND_URL) {
+    return `${process.env.BACKEND_URL}/api`;
+  }
+  return process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
+};
+
 const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api',
+  baseURL: getBaseUrl(),
   headers: {
     'Content-Type': 'application/json',
   },
