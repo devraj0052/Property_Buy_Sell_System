@@ -3,11 +3,13 @@
   "services": {
     "backend": {
       "root": "backend",
-      "framework": "express"
+      "framework": "express",
+      "buildCommand": "npm run vercel-build"
     },
     "frontend": {
       "root": "frontend",
       "framework": "nextjs",
+      "buildCommand": "npm run vercel-build",
       "bindings": [
         {
           "type": "service",
