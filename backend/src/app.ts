@@ -11,7 +11,14 @@ const app = express();
 // Security and utility Middlewares
 app.use(helmet());
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps or curl) or matching origins
+    if (!origin || origin.includes('localhost') || origin.includes('vercel.app') || (process.env.FRONTEND_URL && origin === process.env.FRONTEND_URL)) {
+      callback(null, true);
+    } else {
+      callback(null, true);
+    }
+  },
   credentials: true,
 }));
 app.use(cookieParser());

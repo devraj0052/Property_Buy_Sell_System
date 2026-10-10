@@ -40,8 +40,9 @@ const setCookies = (res: Response, token: string, refreshToken: string) => {
 };
 
 const extractRequestMetadata = (req: Request) => {
-  const ipAddress = (req.headers['x-forwarded-for'] as string) || req.socket.remoteAddress || '127.0.0.1';
-  const geo = geoip.lookup(ipAddress) || { country: 'Unknown', city: 'Unknown', ll: [0, 0] };
+  const rawIp = (req.headers['x-forwarded-for'] as string) || req.socket.remoteAddress || '127.0.0.1';
+  const ipAddress = rawIp.split(',')[0].trim();
+  const geo = geoip.lookup(ipAddress);
   
   const userAgentString = req.headers['user-agent'] || '';
   const parser = new UAParser(userAgentString);
@@ -51,10 +52,10 @@ const extractRequestMetadata = (req: Request) => {
 
   return {
     ipAddress,
-    country: geo.country,
-    city: geo.city,
-    latitude: geo.ll[0],
-    longitude: geo.ll[1],
+    country: geo?.country || 'Unknown',
+    city: geo?.city || 'Unknown',
+    latitude: geo?.ll?.[0] ?? null,
+    longitude: geo?.ll?.[1] ?? null,
     userAgent: userAgentString,
     browser: browser.name || 'Unknown',
     browserVersion: browser.version || 'Unknown',
