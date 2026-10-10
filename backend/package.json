@@ -10,6 +10,11 @@
     "prisma:generate": "prisma generate",
     "prisma:push": "prisma db push"
   },
+  "allowScripts": {
+    "@prisma/client": true,
+    "@prisma/engines": true,
+    "prisma": true
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
