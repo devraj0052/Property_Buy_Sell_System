@@ -2,7 +2,11 @@ import axios from 'axios';
 
 const getBaseUrl = () => {
   if (typeof window !== 'undefined') {
-    return process.env.NEXT_PUBLIC_API_URL || '/api';
+    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    if (!isLocal) {
+      return '/api';
+    }
+    return process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
   }
   if (process.env.BACKEND_URL) {
     return `${process.env.BACKEND_URL}/api`;
